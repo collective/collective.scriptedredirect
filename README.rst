@@ -7,10 +7,11 @@ Introduction
 logic for your `Plone CMS <http://plone.org>`_ site with Python scripting.
 
 Benefits
+---------
 
-* Front-end web server independent (no need to learn Apache, Varnish or Nginx)
+* The redirect logic is front-end web server independent (no need to learn Apache, Varnish or Nginx)
 
-* Python allows to write more complex logic for redirects easier
+* Python allows to write more complex logic for redirects easier (no regular expressions!)
 
 * Python scripts in Plone have access to more complete state information
   (user logged in status, permissions, etc.)
@@ -32,7 +33,7 @@ Edit *redirect_handler* in Zope Management Interface.
 
 .. image :: http://cloud.github.com/downloads/collective/collective.scriptedredirect/Screen%20Shot%202012-09-25%20at%201.28.18%20AM.png
 
-In the case of accident use ``?no_redirect`` HTTP query paramter to override
+In the case of accident use ``?no_redirect`` HTTP query parameter to override
 the redirecter and fix your site.
 
 Internals
