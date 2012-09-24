@@ -59,7 +59,7 @@ def check_redirect(site, event):
 
         try:
             # Call the script and get its output
-            value = site.redirect_handler(url, port)
+            value = site.redirect_handler(url=url, port=port)
         except Exception, e:
             # No silent exceptions plz
             logger.error("Redirect exception for URL:" + url)

@@ -5,29 +5,26 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.scriptedredirect">
 
-  <five:registerPackage package="." initialize=".initialize" />
+    <five:registerPackage package="." initialize=".initialize" />
 
-  <genericsetup:registerProfile
+    <genericsetup:registerProfile
       name="default"
-      title="collective.scriptedredirect"
+      title="Scripted redirects in Python"
       directory="profiles/default"
       description="Installs the collective.scriptedredirect package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
-
-  <!-- Register the import step -->
-  <genericsetup:importStep
+    <!-- Register the import step -->
+    <genericsetup:importStep
       name="collective.scriptedredirect"
       title="Install the default redirect script"
       description=""
-      handler="collective.scriptedredirect.setuphandlers.import_various" />
+      handler="collective.scriptedredirect.setuphandlers.setupVarious" />
 
-
-<subscriber for="Products.CMFCore.interfaces.ISiteRoot zope.traversing.interfaces.IBeforeTraverseEvent"
+    <subscriber for="Products.CMFCore.interfaces.ISiteRoot zope.traversing.interfaces.IBeforeTraverseEvent"
     handler=".redirect.check_redirect" />
 
-  <!-- -*- extra stuff goes here -*- -->
-
+    <!-- -*- extra stuff goes here -*- -->
 
 </configure>

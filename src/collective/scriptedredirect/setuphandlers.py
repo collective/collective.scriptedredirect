@@ -1,6 +1,10 @@
 from Products.PythonScripts.PythonScript import manage_addPythonScript
 
 DEFAULT_REDIRECT_PY_CONTENT = """
+if port not in (80, 443):
+    # Don't kick in HTTP/HTTPS redirects if the site
+    # is directly being accessed from a Zope front-end port
+    return None
 
 # Some default rules - comment out which ones you want to use.
 # Use incoming 'url' and 'port' parameters to do the redirect.
@@ -30,13 +34,16 @@ def runCustomInstallerCode(site):
 
     # Create the script in the site root
     id = "redirect_handler"
-    manage_addPythonScript(site, id)
-    script = site[id]
 
-    # Define the script parameters
-    parameters = "url port"
+    # Don't override the existing installation
+    if not id in site.objectIds():
+        manage_addPythonScript(site, id)
+        script = site[id]
 
-    script.ZPythonScript_edit(parameters, DEFAULT_REDIRECT_PY_CONTENT)
+        # Define the script parameters
+        parameters = "url, port"
+
+        script.ZPythonScript_edit(parameters, DEFAULT_REDIRECT_PY_CONTENT)
 
 
 def setupVarious(context):
