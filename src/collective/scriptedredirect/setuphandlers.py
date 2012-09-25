@@ -41,7 +41,7 @@ def runCustomInstallerCode(site):
         script = site[id]
 
         # Define the script parameters
-        parameters = "url, port"
+        parameters = "url, host, port, path"
 
         script.ZPythonScript_edit(parameters, DEFAULT_REDIRECT_PY_CONTENT)
 

@@ -41,6 +41,10 @@ def check_redirect(site, event):
 
     parts = urlparse(url)
     netloc = parts.netloc.split(":")
+    host = netloc[0]
+
+    path = parts.path
+
     if len(netloc) > 1:
         port = int(netloc[1])
     else:
@@ -59,7 +63,7 @@ def check_redirect(site, event):
 
         try:
             # Call the script and get its output
-            value = site.redirect_handler(url=url, port=port)
+            value = site.redirect_handler(url=url, host=host, port=port, path=path)
         except Exception, e:
             # No silent exceptions plz
             logger.error("Redirect exception for URL:" + url)
