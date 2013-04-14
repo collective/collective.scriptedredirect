@@ -44,9 +44,6 @@ class TestRedirectView(unittest.TestCase):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
 
-        # Register TestingRedirectHandler
-        #self.loadZCML("testing.zcml", package=collective.scriptedredirect)
-
         # Register view directly by pushing it to zope.component multi-adapter registry
 
         zope.component.provideAdapter(
