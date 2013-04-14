@@ -16,6 +16,7 @@ from urlparse import urlparse
 
 # Really old old stuff
 from zExceptions import Redirect
+from ZODB.POSException import ConflictError
 
 from zope.component import queryMultiAdapter
 
@@ -82,12 +83,19 @@ def check_redirect(site, event):
         try:
             # Call the script and get its output
             value = handler(url=url, host=host, port=port, path=path)
-        except Exception, e:
+
+            if value is not None and value.startswith("http"):
+                # Trigger redirect, but only if the output value looks sane
+                raise Redirect(value)
+        except ConflictError:
+            # Zope 2 retry exception
+            raise
+        except Redirect:
+            # Redirect exceptions are the only legal ones
+            # from above logic
+            raise
+        except Exception as e:
             # No silent exceptions plz
             logger.error("Redirect exception for URL:" + url)
             logger.exception(e)
             return
-
-        if value is not None and value.startswith("http"):
-            # Trigger redirect, but only if the output value looks sane
-            raise Redirect(value)
