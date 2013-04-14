@@ -6,6 +6,8 @@ Introduction
 ``collective.scriptedredirect`` allows you to write HTTP 302 Moved Temporary and HTTP 301 Moved Permanently
 logic for your `Plone CMS <http://plone.org>`_ site with Python scripting.
 
+.. image:: https://travis-ci.org/collective/collective.scriptedredirect.png
+
 Benefits
 ---------
 
