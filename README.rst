@@ -65,7 +65,10 @@ Example Python code in ``redirector.py``::
             self.request = request
 
         def __call__(self, url, host, port, path):
-            """
+            """ Handle redirects per site.
+
+            :param path: Path as written in HTTP request (not site virtual path)
+
             :return: None if no redirect needed, otherwise a string full HTTP URL to the redirect target
 
             :raise: zExceptions.Redirect or other custom redirect exception if needed
@@ -85,6 +88,7 @@ Example ZCML::
         for="Products.CMFCore.interfaces.ISiteRoot"
         layer="YOUR_ADDON_LAYER"
         class=".redirector.TestRedirectHandler"
+        permission="zope.Public"
         />
 
 Internals
