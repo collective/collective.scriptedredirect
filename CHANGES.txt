@@ -2,10 +2,10 @@ Changelog
 =========
 
 
-1.2 (unreleased)
-----------------
+1.1.1 (2013-04-14)
+------------------
 
-- Nothing changed yet.
+- Fixed .rst title levels for PyPi [miohtama]
 
 
 1.1 (2013-04-14)
