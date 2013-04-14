@@ -4,7 +4,7 @@ Introduction
 --------------
 
 ``collective.scriptedredirect`` allows you to write HTTP 302 Moved Temporary and HTTP 301 Moved Permanently
-logic for your `Plone CMS <http://plone.org>`_ site with Python scripting.
+redirects for your `Plone CMS <http://plone.org>`_ site in Python code.
 
 .. image:: https://travis-ci.org/collective/collective.scriptedredirect.png
 
@@ -48,12 +48,44 @@ the redirecter and fix your site.
 Doing redirects through the web
 ++++++++++++++++++++++++++++++++++++
 
-Register a browser view called ``redirect_handler`` to write
-the redirect code in addon Python code. ``redirect_handler`` view
-is always preferred over ``redirect_handler`` script.
+You can also register a browser view called ``redirect_handler``.
+In this case, you write the redirect code in addon Python code
+and not through the web.
 
+``redirect_handler`` view is always preferred over ``redirect_handler`` script.
 
+Example Python code in ``redirector.py``::
 
+    class TestingRedirectHandler(object):
+        """ Redirect handler registered as a ``redirect_handler`` Zope 3 <browser:page>
+        """
+
+        def __init__(self, context, request):
+            self.context = context
+            self.request = request
+
+        def __call__(self, url, host, port, path):
+            """
+            :return: None if no redirect needed, otherwise a string full HTTP URL to the redirect target
+
+            :raise: zExceptions.Redirect or other custom redirect exception if needed
+            """
+
+            # Simple example: always access site over www. domain prefix
+            if not url.startswith("http://www."):
+                return url.replace("http://", "http://www.")
+
+            # Don't redirect if we are already using www. prefix
+            return None
+
+Example ZCML::
+
+    <browser:page
+        name="redirect_handler"
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        layer="YOUR_ADDON_LAYER"
+        class=".redirector.TestRedirectHandler"
+        />
 
 Internals
 -----------
@@ -64,4 +96,7 @@ triggered before the request traverses into your Plone site in Zope application 
 Author
 ------
 
-`Mikko Ohtamaa <http://opensourcehacker.com>`_
+Mikko Ohtamaa (`blog <https://opensourcehacker.com>`_, `Facebook <https://www.facebook.com/?q=#/pages/Open-Source-Hacker/181710458567630>`_, `Twitter <https://twitter.com/moo9000>`_, `Google+ <https://plus.google.com/u/0/103323677227728078543/>`_)
+
+
+
