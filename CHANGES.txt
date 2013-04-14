@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1
+-----
+
+- Added redirects via browser view support [miohtama]
+
+- Testing, Travis CI support [miohtama]
+
 1.0-dev (unreleased)
 --------------------
 
