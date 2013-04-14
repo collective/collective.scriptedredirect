@@ -1,5 +1,8 @@
 import unittest2 as unittest
+
 import transaction
+
+from zExceptions import Redirect
 
 from collective.scriptedredirect.testing import\
     COLLECTIVE_SCRIPTEDREDIRECT_FUNCTIONAL
@@ -57,15 +60,17 @@ class TestRedirectScript(unittest.TestCase):
         """ Set www redirect
         """
         self.set_redirect_script(WWW_REDIRECT_SNIPPET)
-        self.browser.open(self.portal.absolute_url())
 
-        # We should get redirect, not ok
-        self.assertNotEqual(self.browser.headers["status"], "200 OK")
-
+        try:
+            self.browser.open(self.portal.absolute_url())
+            raise AssertionError("Should not be reached")
+        except Redirect as e:
+            # Plone test browser handlers directs always as exceptions
+            self.assertEqual(e.message, "http://www.nohost/plone")
 
     def test_bad_snippet(self):
         """ See that syntax error in the script does not cause problems.
         """
         self.set_redirect_script(BAD_SNIPPET)
         self.browser.open(self.portal.absolute_url())
-
+        self.assertEqual(self.browser.headers["status"], "200 Ok")

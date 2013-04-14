@@ -15,4 +15,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <!--
+  <browser:page
+    name="redirect_handler"
+    class=".tests.test_views.TestingRedirectHandler" />
+  -->
+
 </configure>

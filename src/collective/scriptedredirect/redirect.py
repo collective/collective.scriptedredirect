@@ -14,12 +14,29 @@
 import logging
 from urlparse import urlparse
 
-# Now we import things through the last decade...
-
 # Really old old stuff
 from zExceptions import Redirect
 
+from zope.component import queryMultiAdapter
+
 logger = logging.getLogger("redirect")
+
+
+def get_redirect_handler_for_site(site, request):
+    """ Get view or script handling the redirect.
+
+    :return: callable or None
+    """
+
+    view = queryMultiAdapter((site, request), name="redirect_handler")
+    if view:
+        return view
+
+    # Check if we have a redirect handler script in the site root
+    if "redirect_handler" in site:
+        return site["redirect_handler"]
+
+    return None
 
 
 def check_redirect(site, event):
@@ -59,11 +76,12 @@ def check_redirect(site, event):
         return
 
     # Check if we have a redirect handler script in the site root
-    if "redirect_handler" in site:
+    handler = get_redirect_handler_for_site(site, request)
+    if handler:
 
         try:
             # Call the script and get its output
-            value = site.redirect_handler(url=url, host=host, port=port, path=path)
+            value = handler(url=url, host=host, port=port, path=path)
         except Exception, e:
             # No silent exceptions plz
             logger.error("Redirect exception for URL:" + url)
