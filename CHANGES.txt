@@ -8,7 +8,7 @@ Changelog
 
 - Testing, Travis CI support [miohtama]
 
-1.0-dev (unreleased)
---------------------
+1.1 (2013-04-14)
+----------------
 
 - Initial development [miohtama]
