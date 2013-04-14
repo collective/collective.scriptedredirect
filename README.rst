@@ -1,7 +1,7 @@
 .. contents::
 
 Introduction
---------------
+====================
 
 ``collective.scriptedredirect`` allows you to write HTTP 302 Moved Temporary and HTTP 301 Moved Permanently
 redirects for your `Plone CMS <http://plone.org>`_ site in Python code.
@@ -9,7 +9,7 @@ redirects for your `Plone CMS <http://plone.org>`_ site in Python code.
 .. image:: https://travis-ci.org/collective/collective.scriptedredirect.png
 
 Benefits
----------
+====================
 
 * The redirect logic is front-end web server independent: no need to touch variouos configuration files of Apache, Varnish or Nginx)
 
@@ -19,10 +19,10 @@ Benefits
   user logged in status, permissions, etc.
 
 Usage
------
+====================
 
 Installation
-++++++++++++++++
+----------------
 
 Add add-on in *buildout.cfg*::
 
@@ -35,7 +35,7 @@ Run buildout.
 Install *Scripted redirects in Python* in Site Setup > Add-ons.
 
 Doing redirects through the web
-++++++++++++++++++++++++++++++++++++
+--------------------------------
 
 Edit *redirect_handler* in Zope Management Interface in your site root.
 
@@ -46,7 +46,7 @@ the redirecter and fix your site.
 
 
 Doing redirects through the web
-++++++++++++++++++++++++++++++++++++
+--------------------------------
 
 You can also register a browser view called ``redirect_handler``.
 In this case, you write the redirect code in addon Python code
@@ -88,13 +88,13 @@ Example ZCML::
         />
 
 Internals
------------
+====================
 
 ``collective.scriptedredirect`` hooks itself to Zope's pre-traversal hook and is
 triggered before the request traverses into your Plone site in Zope application server.
 
 Author
-------
+====================
 
 Mikko Ohtamaa (`blog <https://opensourcehacker.com>`_, `Facebook <https://www.facebook.com/?q=#/pages/Open-Source-Hacker/181710458567630>`_, `Twitter <https://twitter.com/moo9000>`_, `Google+ <https://plus.google.com/u/0/103323677227728078543/>`_)
 
