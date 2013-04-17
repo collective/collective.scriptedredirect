@@ -21,6 +21,8 @@ Benefits
 Usage
 ====================
 
+Plone 4+ versions supported.
+
 Installation
 ----------------
 
