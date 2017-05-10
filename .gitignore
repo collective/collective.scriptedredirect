@@ -1,8 +1,7 @@
 *.pyc
 *.pyo
 *.mo
-*.egg-info
-*.egg
+*.egg*
 *.EGG
 *.EGG-INFO
 build

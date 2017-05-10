@@ -2,10 +2,11 @@ Changelog
 =========
 
 
-1.1.2 (unreleased)
+2.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 5 compatibility
+  [tomgross]
 
 
 1.1.1 (2013-04-14)

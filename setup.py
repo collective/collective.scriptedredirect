@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 
-version = '1.1.2.dev0'
+version = '2.0.dev0'
 
 long_description = (
     open('README.rst').read()
@@ -17,9 +17,12 @@ setup(name='collective.scriptedredirect',
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=["Environment :: Web Environment",
                    "Framework :: Plone",
+                   "Framework :: Plone :: 4.3",
+                   "Framework :: Plone :: 5.0",
+                   "Framework :: Plone :: 5.1",
                    "Operating System :: OS Independent",
                    "Programming Language :: Python",
-                   "Programming Language :: Python :: 2.6",
+                   "Programming Language :: Python :: 2.7",
                    "Topic :: Software Development :: Libraries :: Python Modules",
                    ],
       keywords='',
@@ -42,6 +45,4 @@ setup(name='collective.scriptedredirect',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      setup_requires=["PasteScript"],
-      paster_plugins=["templer.localcommands"],
       )
