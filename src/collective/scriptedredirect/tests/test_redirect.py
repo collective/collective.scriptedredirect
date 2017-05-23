@@ -12,9 +12,6 @@ from plone.testing.z2 import Browser
 
 
 WWW_REDIRECT_SNIPPET = """
-
-context.plone_log(url)
-
 if not url.startswith("http://www."):
     return url.replace("http://", "http://www.")
 """
@@ -35,7 +32,7 @@ class TestRedirectScript(unittest.TestCase):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
 
-        browser = Browser(self.portal)
+        browser = Browser(self.app)
         browser.handleErrors = False
         browser.raiseHttpErrors = False
         self.browser = browser
@@ -52,7 +49,6 @@ class TestRedirectScript(unittest.TestCase):
     def test_redirect_default_no_redirect(self):
         """ Test that the default installation doesn't produce redirects.
         """
-
         # Assert no error is risen
         self.browser.open(self.portal.absolute_url())
         self.assertEqual(self.browser.headers["status"], "200 Ok")
