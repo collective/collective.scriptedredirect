@@ -10,9 +10,9 @@ python:
 matrix:
   fast_finish: true
 env:
-  - PLONE=4.3
-  - PLONE=5.0
-  - PLONE=5.1
+  - PLONE_VERSION=4.3
+  - PLONE_VERSION=5.0
+  - PLONE_VERSION=5.1
 install:
   - virtualenv .
   - bin/pip install -r requirements.txt
