@@ -1,11 +1,14 @@
-*.pyc
-*.pyo
+*.py[co]
 *.mo
 *.egg*
 *.EGG
 *.EGG-INFO
 build
+/bin
 downloads/*
+/lib*
+/include
+/pip*
 eggs/*
 fake-eggs/*
 parts/*
