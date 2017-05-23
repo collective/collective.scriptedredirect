@@ -1,9 +1,11 @@
-import unittest2 as unittest
+# -*- coding: utf-8 -*-
+import unittest
 
 from zExceptions import Redirect
 
 import zope.component
 import zope.publisher.interfaces.browser
+from zope.publisher.browser import BrowserView
 
 from collective.scriptedredirect.testing import\
     COLLECTIVE_SCRIPTEDREDIRECT_FUNCTIONAL
@@ -11,19 +13,18 @@ from collective.scriptedredirect.testing import\
 from plone.testing.z2 import Browser
 
 
-class TestingRedirectHandler(object):
-    """ Redirect handler registered as a ``redirect_handler`` Zope 3 <browser:page>
+class TestingRedirectHandler(BrowserView):
+    """ Redirect handler registered as a
+       ``redirect_handler`` Zope 3 <browser:page>
     """
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
 
     def __call__(self, url, host, port, path):
         """
-        :return: None if no redirect needed, otherwise a string full HTTP URL to the redirect target
+        :return: None if no redirect needed, otherwise a string
+        full HTTP URL to the redirect target
 
-        :raise: zExceptions.Redirect or other custom redirect exception if needed
+        :raise: zExceptions.Redirect or other
+        custom redirect exception if needed
         """
 
         # Simple example: always access site over www. domain prefix
@@ -44,7 +45,8 @@ class TestRedirectView(unittest.TestCase):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
 
-        # Register view directly by pushing it to zope.component multi-adapter registry
+        # Register view directly by pushing it to
+        # zope.component multi-adapter registry
 
         zope.component.provideAdapter(
             # Our class
@@ -67,10 +69,12 @@ class TestRedirectView(unittest.TestCase):
         """
         # Dynamically unregister a view
         gsm = zope.component.getGlobalSiteManager()
-        gsm.unregisterAdapter(factory=TestingRedirectHandler,
-                              required=(None, None),
-                              provided=zope.publisher.interfaces.browser.IBrowserView,
-                              name="redirect_handler")
+        gsm.unregisterAdapter(
+            factory=TestingRedirectHandler,
+            required=(None, None),
+            provided=zope.publisher.interfaces.browser.IBrowserView,
+            name="redirect_handler"
+        )
 
     def test_redirect_view(self):
         """ Test www redirect.
@@ -82,5 +86,6 @@ class TestRedirectView(unittest.TestCase):
             self.browser.open(self.portal.absolute_url())
             raise AssertionError("Should not be reached")
         except Redirect as e:
-            # Plone test browser handlers directs always as exceptions
+            # Plone test browser handlers
+            # directs always as exceptions
             self.assertEqual(e.message, "http://www.nohost/plone")

@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 """
 
     Call a custom TTW script and allow it to handle redirects.
 
 
-    Use Zope Management Interface to add a ``Script (Python)`` item named ``redirect_handler``
-    to your site root - you can edit this script in fly to change the redirects.
+    Use Zope Management Interface to add a ``Script (Python)`` item
+    named ``redirect_handler`` to your site root - you can edit this
+    script in fly to change the redirects.
 
     * Redirect script must contain ``url`` in its parameter list
 
@@ -51,7 +53,7 @@ def check_redirect(site, event):
 
     For more examples, check
 
-    http://svn.zope.org/Zope/trunk/src/Zope2/App/tests/testExceptionHook.py?rev=115555&view=markup
+    http://svn.zope.org/Zope/trunk/src/Zope2/App/tests/testExceptionHook.py?rev=115555&view=markup   # noqa
     """
     request = event.request
 

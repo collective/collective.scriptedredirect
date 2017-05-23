@@ -1,4 +1,5 @@
-import unittest2 as unittest
+# -*- coding: utf-8 -*-
+import unittest
 
 import transaction
 
@@ -10,7 +11,7 @@ from collective.scriptedredirect.testing import\
 from plone.testing.z2 import Browser
 
 
-WWW_REDIRECT_SNIPPET="""
+WWW_REDIRECT_SNIPPET = """
 
 context.plone_log(url)
 
@@ -19,7 +20,7 @@ if not url.startswith("http://www."):
 """
 
 # Invalid Python code
-BAD_SNIPPET="""
+BAD_SNIPPET = """
 foobarbar
 """
 
