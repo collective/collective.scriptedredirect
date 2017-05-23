@@ -1,27 +1,29 @@
 language: python
+sudo: false
+cache:
+  pip: true
+  directories:
+    - eggs
+    - downloads
 python:
-  - 2.6
   - 2.7
-env:
-  - PLONE=4.1
-  - PLONE=4.2
-# 4.3 unified installer not yet released
-#  - PLONE=4.3
 matrix:
-  exclude:
-    - python: 2.7
-      env: PLONE=4.1
-    - python: 2.6
-      env: PLONE=4.2
-    - python: 2.6
-      env: PLONE=4.3
-before_install:
-  - pip install http://effbot.org/downloads/Imaging-1.1.7.tar.gz
+  fast_finish: true
+env:
+  - PLONE=4.3
+  - PLONE=5.0
+  - PLONE=5.1
 install:
-  - mkdir -p buildout-cache/eggs
-  - mkdir -p buildout-cache/downloads
-  - python bootstrap.py -c travis-$PLONE.x.cfg
-  - bin/buildout -N -t 5 -c travis-$PLONE.x.cfg
-script: bin/test
-
-
+  - virtualenv .
+  - bin/pip install -r requirements.txt
+  - sed -ie "s#test-5.0#test-$PLONE_VERSION#" buildout.cfg
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
+  - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
+script:
+  - bin/code-analysis
+  - bin/coverage run bin/test
+after_success:
+  - bin/coveralls
+notifications:
+  email:
+    - itconsense@gmail.com
