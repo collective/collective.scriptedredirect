@@ -16,7 +16,7 @@ env:
 install:
   - virtualenv .
   - bin/pip install -r requirements.txt
-  - sed -ie "s#test-5.0#test-$PLONE_VERSION#" buildout.cfg
+  - sed -ie "s#test-5.1#test-$PLONE_VERSION#" buildout.cfg
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True annotate
   - bin/buildout -N buildout:download-cache=downloads code-analysis:return-status-codes=True
 script:
