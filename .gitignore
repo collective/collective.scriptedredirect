@@ -37,3 +37,6 @@ __minitage__*
 .project
 .pydevproject
 .DS_Store
+.coverage
+.*.cfg
+pip-selfcheck.json
