@@ -14,8 +14,10 @@
 
 
 import logging
-from urlparse import urlparse
-
+try:
+    from urlparse import urlparse
+except ImportError:
+    import urllib.parse as urlparse
 # Really old old stuff
 from zExceptions import Redirect
 from ZODB.POSException import ConflictError
