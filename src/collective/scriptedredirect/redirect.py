@@ -17,7 +17,7 @@ import logging
 try:
     from urlparse import urlparse
 except ImportError:
-    import urllib.parse as urlparse
+    from urllib.parse import urlparse
 # Really old old stuff
 from zExceptions import Redirect
 from ZODB.POSException import ConflictError
